@@ -1,12 +1,23 @@
 ---
-title: "Benchmarking functions to compute the sum of digits"
+title: "Benchmarking Functions to Compute the Sum of Digits"
 author: "Uwe Block"
 date: "2016-03-28"
-output: html_document
+output:
+  md_document:
+    variant: markdown_github
 ---
 
+# Benchmarking Functions to Compute the Sum of Digits
+
+#### *Uwe Block*
+#### 2016-03-28
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(
+  echo = TRUE,
+  collapse = TRUE,
+  comment = "#>"
+  )
 ```
 
 ## Introduction
@@ -21,7 +32,7 @@ The puzzle requires to find all years where the sum of the year plus the sum of 
 
 Here is *one* of the possible solutions (there are some more to find):
 
-``` 
+``` r
 1992 + sum_of_digits(1992) + sum_of_digits(sum_of_digits(1992)) =
 1992 + (1 + 9 + 9 + 2)     + sum_of_digits(sum_of_digits(1992)) =
 1992 + 21                  + sum_of_digits(sum_of_digits(1992)) =
@@ -79,7 +90,7 @@ Using function `digitsBase` from package `GLDEX` as suggested by
 [stackoverflow](http://stackoverflow.com/a/18675445/3817004):
 
 ```{r var3}
-library(GLDEX)
+library(GLDEX, quietly = TRUE)
 digitsum3 <-  function(x) sum(digitsBase(x, base = 10))
 ```
 
@@ -119,8 +130,8 @@ sapply(1992L:2012L,  digitsum4)
 ## Benchmarks
 
 ```{r benchmark}
-library(microbenchmark)
-library(ggplot2)
+library(microbenchmark, quietly = TRUE)
+library(ggplot2, quietly = TRUE)
 
 # define check function
 my_check <- function(values) {
