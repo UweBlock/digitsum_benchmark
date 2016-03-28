@@ -103,7 +103,7 @@ sapply(1992L:2012L,  digitsum3)
 
 ### Variant 4
 
-Suggested by Greg Snow in the 
+Based on a function by Greg Snow in the 
 [R-help mailing list](https://stat.ethz.ch/pipermail/r-help/2011-March/270786.html):
 
 ```{r var4}

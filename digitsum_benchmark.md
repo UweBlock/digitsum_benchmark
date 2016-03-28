@@ -86,7 +86,7 @@ sapply(1992L:2012L,  digitsum3)
 
 ### Variant 4
 
-Suggested by Greg Snow in the [R-help mailing list](https://stat.ethz.ch/pipermail/r-help/2011-March/270786.html):
+Based on a function by Greg Snow in the [R-help mailing list](https://stat.ethz.ch/pipermail/r-help/2011-March/270786.html):
 
 ``` r
 digitsum4 <- function(x) {
@@ -133,10 +133,10 @@ bm1 <- microbenchmark(
 print(bm1)
 #> Unit: microseconds
 #>          expr    min     lq      mean median     uq     max neval
-#>  digitsum1(x)  2.266  3.398  4.687497  3.776  4.154 728.354  1000
-#>  digitsum2(x)  2.266  2.644  3.501110  3.021  3.399  26.054  1000
-#>  digitsum3(x) 13.216 15.481 18.206786 16.237 18.880 107.989  1000
-#>  digitsum4(x) 13.215 14.726 17.379145 15.482 17.747  90.997  1000
+#>  digitsum1(x)  2.643  3.398  3.980273  3.776  4.154  18.125  1000
+#>  digitsum2(x)  2.266  3.021  3.533980  3.022  3.399  20.012  1000
+#>  digitsum3(x) 13.216 15.481 17.785787 16.237 18.880  52.107  1000
+#>  digitsum4(x) 13.593 14.726 17.413879 15.482 17.558 756.295  1000
 autoplot(bm1)
 ```
 
@@ -155,15 +155,15 @@ bm2 <- microbenchmark(
 print(bm2)
 #> Unit: milliseconds
 #>                  expr       min        lq      mean    median        uq
-#>  sapply(x, digitsum1)  38.17572  39.84577  44.34404  40.80199  42.55529
-#>  sapply(x, digitsum2)  33.58698  34.83073  36.10401  36.52664  37.56971
-#>  sapply(x, digitsum3) 161.29476 174.47008 177.15921 178.04577 180.83043
-#>  sapply(x, digitsum4) 159.59564 160.77445 167.32650 167.59451 172.69205
+#>  sapply(x, digitsum1)  39.85256  40.41818  41.05844  40.80237  41.43198
+#>  sapply(x, digitsum2)  34.07557  36.02389  41.68074  37.38941  42.21962
+#>  sapply(x, digitsum3) 163.51795 167.62453 173.97677 176.06064 179.02333
+#>  sapply(x, digitsum4) 158.66679 161.64478 165.98364 166.98037 169.21301
 #>        max neval
-#>   77.32901    10
-#>   37.99184    10
-#>  189.46156    10
-#>  174.39607    10
+#>   43.67331    10
+#>   73.21224    10
+#>  181.62033    10
+#>  172.54743    10
 autoplot(bm2)
 ```
 
