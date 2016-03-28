@@ -1,0 +1,161 @@
+---
+title: "Benchmarking functions to compute the sum of digits"
+author: "Uwe Block"
+date: "2016-03-28"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+This is inspired by
+[Rätsel der Woche](http://www.spiegel.de/wissenschaft/mensch/raetsel-der-woche-verflixtes-jahr-2016-a-1069870.html) (*Puzzle of the Week*) in
+[Spiegel Online](http://www.spiegel.de/wissenschaft/mensch/raetsel-der-woche-verflixtes-jahr-2016-a-1069870.html)
+titled 
+[Verflixtes Jahr 2016](http://www.spiegel.de/wissenschaft/mensch/raetsel-der-woche-verflixtes-jahr-2016-a-1069870.html)
+(*Cursed Year 2016*) by
+[Holger Dambeck](http://www.spiegel.de/impressum/autor-1707.html). 
+The puzzle requires to find all years where the sum of the year plus the sum of digits of the year plus the sum of digits of the sum of digits of the year yields 2016.
+
+Here is *one* of the possible solutions (there are some more to find):
+
+``` 
+1992 + sum_of_digits(1992) + sum_of_digits(sum_of_digits(1992)) =
+1992 + (1 + 9 + 9 + 2)     + sum_of_digits(sum_of_digits(1992)) =
+1992 + 21                  + sum_of_digits(sum_of_digits(1992)) =
+1992 + 21                  + sum_of_digits(21)                  =
+1992 + 21                  + (2 + 1)                            =
+1992 + 21                  + 3                                  =
+2016
+```
+To find all solutions requires to test a vector of calendar years. However, I was quite surprised 
+to learn that `R` lacks a built-in function for computing the sum of digits of an integer number. Searching the web I found two hints
+
+* http://stackoverflow.com/questions/18675285/digit-sum-function-in-r
+* https://stat.ethz.ch/pipermail/r-help/2011-March/270786.html
+
+suggesting different ways to compute the sum of  digits. Unfortunately, the different methods were not compared in terms of speed.
+
+## Function Definitions
+
+### Variant 1
+
+Suggested by [user2030503](http://stackoverflow.com/users/2030503/user2030503) in his question on 
+[stackoverflow](http://stackoverflow.com/q/18675285/3817004):
+
+```{r var1}
+digitsum1 <- function(x) sum(as.numeric(unlist(strsplit(as.character(x), split = ""))))
+```
+
+Sample results:
+
+```{r test1}
+digitsum1(1234L)
+sapply(1992L:2012L,  digitsum1)
+```
+
+### Variant 2
+
+Suggested by [Julius](http://stackoverflow.com/users/1320535/julius) in his answer on 
+[stackoverflow](http://stackoverflow.com/a/18675519/3817004):
+
+```{r var2}
+digitsum2 <- function(x) sum(floor(x / 10^(0:(nchar(x) - 1))) %% 10)
+```
+
+Sample results:
+
+```{r test2}
+digitsum2(1234L)
+sapply(1992L:2012L,  digitsum2)
+```
+
+### Variant 3
+
+Using function `digitsBase` from package `GLDEX` as suggested by 
+[42-](http://stackoverflow.com/users/1855677/42) in his answer on 
+[stackoverflow](http://stackoverflow.com/a/18675445/3817004):
+
+```{r var3}
+library(GLDEX)
+digitsum3 <-  function(x) sum(digitsBase(x, base = 10))
+```
+
+Sample results:
+
+```{r test3}
+digitsum3(1234L)
+sapply(1992L:2012L,  digitsum3)
+```
+
+### Variant 4
+
+Suggested by Greg Snow in the 
+[R-help mailing list](https://stat.ethz.ch/pipermail/r-help/2011-March/270786.html):
+
+```{r var4}
+digitsum4 <- function(x) {
+  sum(
+    if(length(x) > 1 ) {
+      lapply(x, digits)
+    } else {
+      n <- nchar(x)
+      rev( x %/% 10^seq(0, length.out=n) %% 10 )
+    }
+  )
+}
+```
+
+Sample results:
+
+```{r test4}
+digitsum4(1234L)
+sapply(1992L:2012L,  digitsum4)
+```
+
+
+## Benchmarks
+
+```{r benchmark}
+library(microbenchmark)
+library(ggplot2)
+
+# define check function
+my_check <- function(values) {
+  all(sapply(values[-1], function(x) identical(values[[1]], x)))
+}
+
+x <- 1234L
+bm1 <- microbenchmark(
+  digitsum1(x),
+  digitsum2(x),
+  digitsum3(x),
+  digitsum4(x),
+  times = 1000L, check = my_check
+)
+print(bm1)
+autoplot(bm1)
+
+x <- 1L:10000L
+bm2 <- microbenchmark(
+  sapply(x, digitsum1),
+  sapply(x, digitsum2),
+  sapply(x, digitsum3),
+  sapply(x, digitsum4),
+  times = 10L, check = my_check
+)
+print(bm2)
+autoplot(bm2)
+```
+
+## Conclusion
+
+Variant 2 is slightly faster than variant 1 while variants 3 and 4 are much slower.
+
+Please, note that *no* checks on the validity of input parameters is included in the function definitions.
+
+
+
+
