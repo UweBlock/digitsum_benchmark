@@ -54,7 +54,8 @@ suggesting different ways to compute the sum of  digits. Unfortunately, the diff
 ### Variant 1
 
 Suggested by [user2030503](http://stackoverflow.com/users/2030503/user2030503) in his question on 
-[stackoverflow](http://stackoverflow.com/q/18675285/3817004):
+[stackoverflow](http://stackoverflow.com/q/18675285/3817004) and by Ivan Calandra in the 
+[R-help mailing list](https://stat.ethz.ch/pipermail/r-help/2011-March/270713.html):
 
 ```{r var1}
 digitsum1 <- function(x) sum(as.numeric(unlist(strsplit(as.character(x), split = ""))))

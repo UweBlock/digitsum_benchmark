@@ -34,7 +34,7 @@ Function Definitions
 
 ### Variant 1
 
-Suggested by [user2030503](http://stackoverflow.com/users/2030503/user2030503) in his question on [stackoverflow](http://stackoverflow.com/q/18675285/3817004):
+Suggested by [user2030503](http://stackoverflow.com/users/2030503/user2030503) in his question on [stackoverflow](http://stackoverflow.com/q/18675285/3817004) and by Ivan Calandra in the [R-help mailing list](https://stat.ethz.ch/pipermail/r-help/2011-March/270713.html):
 
 ``` r
 digitsum1 <- function(x) sum(as.numeric(unlist(strsplit(as.character(x), split = ""))))
@@ -132,11 +132,11 @@ bm1 <- microbenchmark(
 )
 print(bm1)
 #> Unit: microseconds
-#>          expr    min      lq      mean median     uq     max neval
-#>  digitsum1(x)  2.266  3.3980  4.731677  3.776  4.154 760.072  1000
-#>  digitsum2(x)  2.266  2.8325  3.497381  3.022  3.399  20.768  1000
-#>  digitsum3(x) 13.593 15.4810 18.044053 16.237 18.879  76.650  1000
-#>  digitsum4(x) 13.216 14.7260 16.981901 15.482 17.746  45.688  1000
+#>          expr    min     lq      mean median     uq     max neval
+#>  digitsum1(x)  2.266  3.399  3.878339  3.776  4.154  18.502  1000
+#>  digitsum2(x)  2.266  2.644  3.390129  3.022  3.399  26.432  1000
+#>  digitsum3(x) 13.593 15.481 18.510736 16.237 18.502 765.735  1000
+#>  digitsum4(x) 13.216 14.726 16.767082 15.482 17.369  50.596  1000
 autoplot(bm1)
 ```
 
@@ -155,15 +155,15 @@ bm2 <- microbenchmark(
 print(bm2)
 #> Unit: milliseconds
 #>                  expr       min        lq      mean    median        uq
-#>  sapply(x, digitsum1)  38.76173  40.48916  41.67979  41.15729  42.27059
-#>  sapply(x, digitsum2)  34.60758  35.20076  36.45063  36.69485  37.48249
-#>  sapply(x, digitsum3) 161.71991 164.72395 175.50948 175.29603 182.94224
-#>  sapply(x, digitsum4) 158.21785 166.25278 171.85668 170.72881 172.61917
+#>  sapply(x, digitsum1)  39.11062  40.45707  43.43619  41.36251  43.43392
+#>  sapply(x, digitsum2)  34.14882  34.63968  36.17194  36.27404  36.62689
+#>  sapply(x, digitsum3) 161.28796 172.77927 178.07688 177.59324 179.13245
+#>  sapply(x, digitsum4) 161.01346 163.24308 168.92798 169.92702 172.11283
 #>        max neval
-#>   47.39512    10
-#>   37.89858    10
-#>  201.76089    10
-#>  200.11124    10
+#>   59.28591    10
+#>   38.63675    10
+#>  213.57691    10
+#>  180.60539    10
 autoplot(bm2)
 ```
 
