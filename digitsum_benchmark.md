@@ -133,10 +133,10 @@ bm1 <- microbenchmark(
 print(bm1)
 #> Unit: microseconds
 #>          expr    min     lq      mean median     uq     max neval
-#>  digitsum1(x)  2.643  3.398  3.980273  3.776  4.154  18.125  1000
-#>  digitsum2(x)  2.266  3.021  3.533980  3.022  3.399  20.012  1000
-#>  digitsum3(x) 13.216 15.481 17.785787 16.237 18.880  52.107  1000
-#>  digitsum4(x) 13.593 14.726 17.413879 15.482 17.558 756.295  1000
+#>  digitsum1(x)  2.643  3.398  4.760770  3.776  4.154 746.479  1000
+#>  digitsum2(x)  2.266  2.644  3.437702  3.022  3.399  22.278  1000
+#>  digitsum3(x) 13.971 15.482 17.987050 16.614 19.257  49.086  1000
+#>  digitsum4(x) 13.593 14.726 17.055537 15.482 17.747  80.425  1000
 autoplot(bm1)
 ```
 
@@ -155,15 +155,15 @@ bm2 <- microbenchmark(
 print(bm2)
 #> Unit: milliseconds
 #>                  expr       min        lq      mean    median        uq
-#>  sapply(x, digitsum1)  39.85256  40.41818  41.05844  40.80237  41.43198
-#>  sapply(x, digitsum2)  34.07557  36.02389  41.68074  37.38941  42.21962
-#>  sapply(x, digitsum3) 163.51795 167.62453 173.97677 176.06064 179.02333
-#>  sapply(x, digitsum4) 158.66679 161.64478 165.98364 166.98037 169.21301
+#>  sapply(x, digitsum1)  39.00603  39.78875  41.21544  40.75819  42.96874
+#>  sapply(x, digitsum2)  34.30099  34.82356  36.79083  36.94594  37.83099
+#>  sapply(x, digitsum3) 162.59741 170.26948 180.78433 178.48433 191.41101
+#>  sapply(x, digitsum4) 161.00591 168.36270 169.87510 170.32763 172.91444
 #>        max neval
-#>   43.67331    10
-#>   73.21224    10
-#>  181.62033    10
-#>  172.54743    10
+#>   43.70125    10
+#>   40.91017    10
+#>  203.94935    10
+#>  174.79744    10
 autoplot(bm2)
 ```
 
@@ -175,3 +175,43 @@ Conclusion
 Variant 2 is slightly faster than variant 1 while variants 3 and 4 are much slower.
 
 Please, note that *no* checks on the validity of input parameters is included in the function definitions.
+
+Session Info
+------------
+
+``` r
+devtools::session_info()
+#> Session info --------------------------------------------------------------
+#>  setting  value                                      
+#>  version  R version 3.2.4 Revised (2016-03-16 r70336)
+#>  system   x86_64, mingw32                            
+#>  ui       RTerm                                      
+#>  language (EN)                                       
+#>  collate  German_Germany.1252                        
+#>  tz       Europe/Berlin                              
+#>  date     2016-03-29
+#> Packages ------------------------------------------------------------------
+#>  package        * version date       source        
+#>  cluster        * 2.0.3   2015-07-21 CRAN (R 3.2.4)
+#>  colorspace       1.2-6   2015-03-11 CRAN (R 3.2.4)
+#>  devtools         1.10.0  2016-01-23 CRAN (R 3.2.4)
+#>  digest           0.6.9   2016-01-08 CRAN (R 3.2.4)
+#>  evaluate         0.8.3   2016-03-05 CRAN (R 3.2.4)
+#>  formatR          1.3     2016-03-05 CRAN (R 3.2.4)
+#>  ggplot2        * 2.1.0   2016-03-01 CRAN (R 3.2.4)
+#>  GLDEX          * 2.0.0.3 2015-07-04 CRAN (R 3.2.4)
+#>  gtable           0.2.0   2016-02-26 CRAN (R 3.2.4)
+#>  htmltools        0.3.5   2016-03-21 CRAN (R 3.2.4)
+#>  knitr            1.12.3  2016-01-22 CRAN (R 3.2.4)
+#>  magrittr         1.5     2014-11-22 CRAN (R 3.2.4)
+#>  memoise          1.0.0   2016-01-29 CRAN (R 3.2.4)
+#>  microbenchmark * 1.4-2.1 2015-11-25 CRAN (R 3.2.4)
+#>  munsell          0.4.3   2016-02-13 CRAN (R 3.2.4)
+#>  plyr             1.8.3   2015-06-12 CRAN (R 3.2.4)
+#>  Rcpp             0.12.3  2016-01-10 CRAN (R 3.2.4)
+#>  rmarkdown        0.9.5   2016-02-22 CRAN (R 3.2.4)
+#>  scales           0.4.0   2016-02-26 CRAN (R 3.2.4)
+#>  stringi          1.0-1   2015-10-22 CRAN (R 3.2.3)
+#>  stringr          1.0.0   2015-04-30 CRAN (R 3.2.4)
+#>  yaml             2.1.13  2014-06-12 CRAN (R 3.2.4)
+```

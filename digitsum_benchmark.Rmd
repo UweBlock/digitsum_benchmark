@@ -167,6 +167,13 @@ Variant 2 is slightly faster than variant 1 while variants 3 and 4 are much slow
 
 Please, note that *no* checks on the validity of input parameters is included in the function definitions.
 
+## Session Info
+
+```{r sessioninfo}
+devtools::session_info()
+```
+
+
 
 
 
