@@ -138,24 +138,25 @@ bm1 <- microbenchmark(
   digitsum4(x),
   times = 1000L, check = my_check
 )
-print(bm1)
+print(bm1, digits = 3)
 autoplot(bm1)
 
-x <- 1L:10000L
+x <- 1001L:2000L
 bm2 <- microbenchmark(
   sapply(x, digitsum1),
   sapply(x, digitsum2),
   sapply(x, digitsum3),
   sapply(x, digitsum4),
-  times = 10L, check = my_check
+  times = 100L, check = my_check
 )
-print(bm2)
+print(bm2, digits = 3)
 autoplot(bm2)
 ```
 
 ## Conclusion
 
-Variant 2 is slightly faster than variant 1 while variants 3 and 4 are much slower.
+Variant 2 is slightly faster than variant 1 while variants 4 and 3 are much slower. 
+Although the code of variant 4 seems to be similar to variant 2, variant 4 is less efficient  (but still better than variant 3).
 
 Please, note that *no* checks on the validity of input parameters is included in the function definitions.
 

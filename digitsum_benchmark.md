@@ -121,13 +121,13 @@ bm1 <- microbenchmark(
   digitsum4(x),
   times = 1000L, check = my_check
 )
-print(bm1)
+print(bm1, digits = 3)
 #> Unit: microseconds
-#>          expr    min     lq      mean median     uq     max neval
-#>  digitsum1(x)  2.266  3.399  3.878339  3.776  4.154  18.502  1000
-#>  digitsum2(x)  2.266  2.644  3.390129  3.022  3.399  26.432  1000
-#>  digitsum3(x) 13.593 15.481 18.510736 16.237 18.502 765.735  1000
-#>  digitsum4(x) 13.216 14.726 16.767082 15.482 17.369  50.596  1000
+#>          expr   min    lq  mean median    uq    max neval
+#>  digitsum1(x)  2.64  3.40  4.01   3.78  4.15   48.3  1000
+#>  digitsum2(x)  2.27  2.64  3.45   3.02  3.40   18.9  1000
+#>  digitsum3(x) 13.59 15.48 19.63  16.99 19.26 1283.4  1000
+#>  digitsum4(x)  8.69 10.20 12.66  10.95 12.08  751.0  1000
 autoplot(bm1)
 ```
 
@@ -135,26 +135,21 @@ autoplot(bm1)
 
 ``` r
 
-x <- 1L:10000L
+x <- 1001L:2000L
 bm2 <- microbenchmark(
   sapply(x, digitsum1),
   sapply(x, digitsum2),
   sapply(x, digitsum3),
   sapply(x, digitsum4),
-  times = 10L, check = my_check
+  times = 100L, check = my_check
 )
-print(bm2)
+print(bm2, digits = 3)
 #> Unit: milliseconds
-#>                  expr       min        lq      mean    median        uq
-#>  sapply(x, digitsum1)  39.11062  40.45707  43.43619  41.36251  43.43392
-#>  sapply(x, digitsum2)  34.14882  34.63968  36.17194  36.27404  36.62689
-#>  sapply(x, digitsum3) 161.28796 172.77927 178.07688 177.59324 179.13245
-#>  sapply(x, digitsum4) 161.01346 163.24308 168.92798 169.92702 172.11283
-#>        max neval
-#>   59.28591    10
-#>   38.63675    10
-#>  213.57691    10
-#>  180.60539    10
+#>                  expr   min    lq  mean median    uq   max neval
+#>  sapply(x, digitsum1)  3.41  3.59  3.86   3.68  3.89  5.49   100
+#>  sapply(x, digitsum2)  3.00  3.19  3.41   3.25  3.34  4.83   100
+#>  sapply(x, digitsum3) 15.07 15.85 16.59  16.22 17.09 24.89   100
+#>  sapply(x, digitsum4)  9.76 10.29 11.18  10.56 11.48 45.20   100
 autoplot(bm2)
 ```
 
