@@ -1,2 +1,3 @@
-# digitsum_benchmark
-Benchmark different methods for computing the sum of digits in R
+# Benchmarking Different Methods for Computing the Sum of Digits in R
+
+[Click here for results](digitsum_benchmark.md)
