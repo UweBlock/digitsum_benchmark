@@ -140,7 +140,7 @@ print(bm1)
 autoplot(bm1)
 ```
 
-![](digitsum_benchmark_files/figure-markdown_github/benchmark-1.png)<!-- -->
+![](digitsum-benchmark-1.png)<!-- -->
 
 ``` r
 
@@ -167,12 +167,12 @@ print(bm2)
 autoplot(bm2)
 ```
 
-![](digitsum_benchmark_files/figure-markdown_github/benchmark-2.png)<!-- -->
+![](digitsum-benchmark-2.png)<!-- -->
 
 Conclusion
 ----------
 
-Variant 2 is slightly faster than variant 1 while variants 3 and 4 are much slower.
+Variant 2 is slightly faster than variant 1 while variants 4 and 3 are much slower. Although the code of variant 4 seems to be similar to variant 2, variant 4 is less efficient (but still better than variant 3).
 
 Please, note that *no* checks on the validity of input parameters is included in the function definitions.
 

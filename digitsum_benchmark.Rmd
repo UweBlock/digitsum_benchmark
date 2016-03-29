@@ -16,8 +16,8 @@ output:
 knitr::opts_chunk$set(
   echo = TRUE,
   collapse = TRUE,
-  comment = "#>"
-  )
+  comment = "#>",
+  fig.path = "digitsum-")
 ```
 
 ## Introduction
