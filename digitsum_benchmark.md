@@ -89,16 +89,7 @@ sapply(1992L:2012L,  digitsum3)
 Based on a function by Greg Snow in the [R-help mailing list](https://stat.ethz.ch/pipermail/r-help/2011-March/270786.html):
 
 ``` r
-digitsum4 <- function(x) {
-  sum(
-    if(length(x) > 1 ) {
-      lapply(x, digits)
-    } else {
-      n <- nchar(x)
-      rev( x %/% 10^seq(0, length.out=n) %% 10 )
-    }
-  )
-}
+digitsum4 <- function(x) sum(x %/% 10^seq(0, length.out = nchar(x)) %% 10)
 ```
 
 Sample results:
